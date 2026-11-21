@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>À propos - Club Manager FC</title>
+<meta name="google-adsense-account" content="ca-pub-5739608985175147">
+<meta name="description" content="About Club Manager FC, a free football manager game.">
+</head>
+<body style="font-family:Arial,sans-serif;max-width:640px;margin:auto;padding:16px;line-height:1.6">
+<div style="text-align:end"><select id="lang"></select></div>
+<h1 id="h"></h1><p id="p1"></p><p id="p2"></p><p id="p3"></p>
+<p><a href="index.html" id="b1"></a> · <a href="guide.html" id="b2"></a> · <a href="privacy.html" id="b3"></a></p>
+<script src="lang.js"></script>
+<script>
+const AB={
+fr:{h:"À propos de Club Manager FC",p1:"Club Manager FC est un jeu de gestion de football gratuit, créé par un passionné. Vous dirigez un club depuis la 4e division, recrutez des joueurs, gérez votre budget, votre stade et votre personnel, et visez le titre.",p2:"Tous les clubs et tous les joueurs sont fictifs. Le jeu fonctionne dans votre navigateur et enregistre votre progression uniquement sur votre appareil.",p3:"Contact :",b1:"▶ Jouer",b2:"Guide du jeu",b3:"Politique de confidentialité"},
+en:{h:"About Club Manager FC",p1:"Club Manager FC is a free football management game made by a fan. You run a club from the 4th division, sign players, manage your budget, stadium and staff, and aim for the title.",p2:"All clubs and players are fictional. The game runs in your browser and saves your progress only on your device.",p3:"Contact:",b1:"▶ Play",b2:"Game guide",b3:"Privacy policy"},
+es:{h:"Acerca de Club Manager FC",p1:"Club Manager FC es un juego gratuito de gestión de fútbol creado por un aficionado. Diriges un club desde la 4.ª división, fichas jugadores, gestionas presupuesto, estadio y personal, y luchas por el título.",p2:"Todos los clubes y jugadores son ficticios. El juego funciona en tu navegador y guarda tu progreso solo en tu dispositivo.",p3:"Contacto:",b1:"▶ Jugar",b2:"Guía del juego",b3:"Política de privacidad"},
+pt:{h:"Sobre o Club Manager FC",p1:"O Club Manager FC é um jogo gratuito de gestão de futebol criado por um apaixonado. Dirige um clube desde a 4.ª divisão, contrata jogadores, gere orçamento, estádio e equipa técnica, e luta pelo título.",p2:"Todos os clubes e jogadores são fictícios. O jogo funciona no navegador e guarda o progresso apenas no seu dispositivo.",p3:"Contacto:",b1:"▶ Jogar",b2:"Guia do jogo",b3:"Política de privacidade"},
+ar:{h:"حول Club Manager FC",p1:"Club Manager FC لعبة مجانية لإدارة كرة القدم صنعها هاوٍ. تقود نادياً من الدرجة الرابعة، وتتعاقد مع اللاعبين، وتدير الميزانية والملعب والطاقم، وتسعى للقب.",p2:"جميع الأندية واللاعبين خياليون. تعمل اللعبة في متصفحك ويُحفظ تقدمك على جهازك فقط.",p3:"اتصل بنا:",b1:"▶ العب",b2:"دليل اللعبة",b3:"سياسة الخصوصية"}
+};
+function applyLang(){
+  const t=AB[LANG]||AB.en;document.documentElement.lang=LANG;document.documentElement.dir=LANG==="ar"?"rtl":"ltr";
+  document.title=t.h+" - Club Manager FC";
+  ["h","p1","p2","b1","b2","b3"].forEach(k=>document.getElementById(k).textContent=t[k]);
+  document.getElementById("p3").innerHTML=t.p3+' <a href="mailto:yowangenesys@gmail.com">yowangenesys@gmail.com</a>';
+  const s=document.getElementById("lang");s.innerHTML=Object.keys(LANGS).map(k=>`<option value="${k}"${k===LANG?" selected":""}>${LANGS[k]}</option>`).join("");s.onchange=()=>setLang(s.value);
+}
+applyLang();
+</script>
+<script src="cookies.js"></script>
+</body></html>
