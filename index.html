@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Club Manager FC</title>
+<meta name="google-adsense-account" content="ca-pub-5739608985175147">
+<meta name="description" content="Club Manager FC - Football manager game / Jeu de manager de football / Juego de mánager de fútbol">
+<!-- ADSENSE : collez ici votre script AdSense après approbation du site
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5739608985175147" crossorigin="anonymous"></script>
+-->
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,Arial,sans-serif;background:#0b1e3a;color:#fff;max-width:520px;margin:0 auto;padding-bottom:70px}
+header{background:#0f2a52;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px;position:sticky;top:0;z-index:5}
+header h1{font-size:16px;flex:1}
+.money{background:#16a34a;padding:4px 10px;border-radius:12px;font-size:13px;font-weight:700;white-space:nowrap}
+main{padding:12px}
+.card{background:#14335f;border-radius:12px;padding:12px;margin-bottom:12px}
+h2{font-size:15px;margin-bottom:8px;color:#fbbf24}
+button{background:#fbbf24;color:#111;border:0;border-radius:10px;padding:10px 14px;font-weight:700;font-size:14px;cursor:pointer}
+button.sec{background:#2b4c80;color:#fff}
+button.on{outline:2px solid #fbbf24}
+button:disabled{opacity:.4}
+button.full{width:100%;padding:13px;font-size:15px}
+button.sm{padding:6px 9px;font-size:12px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+td,th{padding:6px 4px;text-align:center}
+td:nth-child(2),th:nth-child(2){text-align:start}
+tr.me{background:#1d4ed8}
+tr.zup td:first-child{border-inline-start:4px solid #22c55e}
+tr.zdn td:first-child{border-inline-start:4px solid #ef4444}
+tr+tr td{border-top:1px solid #1e407a}
+nav{position:fixed;bottom:0;left:0;right:0;max-width:520px;margin:0 auto;display:flex;background:#0f2a52}
+nav button{flex:1;border-radius:0;background:transparent;color:#cbd5e1;padding:14px 2px;font-size:11px}
+nav button.on{color:#fbbf24;border-top:3px solid #fbbf24;outline:0}
+.score{font-size:24px;text-align:center;font-weight:800;margin:6px 0}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 4px;border-top:1px solid #1e407a;font-size:13px;flex-wrap:wrap;border-radius:6px}
+.row.sel{outline:2px solid #fbbf24;background:#1d3f73}
+.pos{display:inline-block;width:34px;text-align:center;border-radius:6px;font-size:11px;font-weight:700;padding:2px 0;margin-inline-end:6px;color:#111}
+.GK{background:#facc15}.DEF{background:#38bdf8}.MID{background:#4ade80}.ATT{background:#fb7185}
+.r{font-weight:800}
+.num{display:inline-block;min-width:22px;text-align:center;color:#fbbf24;font-size:14px}
+.ad{background:#0f2a52;border:1px dashed #3b5b94;border-radius:8px;text-align:center;font-size:11px;color:#8aa3c9;padding:18px 6px;margin:12px 0;min-height:60px}
+select{background:#14335f;color:#fff;border:1px solid #2b4c80;border-radius:8px;padding:6px;font-size:13px}
+.res{font-size:13px;padding:3px 0}
+.small{font-size:12px;color:#94a3b8}
+.bar{display:flex;align-items:center;gap:8px;font-size:12px;margin:4px 0}
+.bar span{width:72px}
+.bar div{flex:1;height:8px;background:#0b1e3a;border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:#fbbf24}
+.pl{transition:transform .2s linear}
+.pt{paint-order:stroke;stroke:#000;stroke-width:.6px}
+.evlog{max-height:190px;overflow:auto}
+.ctl{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.ctl button{flex:1}
+.fx{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.lugrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.lu{font-size:12px;padding:1px 0}
+.lu b{display:inline-block;min-width:20px;color:#fbbf24}
+.fixture{display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:700;margin:8px 0;flex-wrap:wrap}
+.cl{display:inline-flex;align-items:center;gap:5px}
+header{flex-wrap:wrap}
+.gbars{display:flex;gap:8px;flex-basis:100%}
+.gb{flex:1;position:relative;background:#0b1e3a;border-radius:10px;padding:5px 8px;font-size:12px;overflow:hidden;display:flex;justify-content:space-between;align-items:center;gap:6px}
+.gb small{color:#94a3b8;font-size:10px}
+.gb b{font-size:14px;z-index:1}
+.gb i{position:absolute;left:0;bottom:0;height:3px}
+.tag{display:inline-block;background:#2b4c80;border-radius:8px;padding:2px 8px;font-size:11px;margin:2px 3px 0 0}
+.eb{flex:0 0 100%;height:4px;background:#0b1e3a;border-radius:2px;overflow:hidden;margin-top:2px}
+.eb i,.mb i{display:block;height:100%}
+.mb{display:inline-block;width:26px;height:4px;background:#0b1e3a;border-radius:2px;overflow:hidden;margin-inline-start:4px;vertical-align:middle}
+.lu.sel{background:#1d3f73;outline:1px solid #fbbf24;border-radius:4px}
+.lu{cursor:pointer}
+.hub{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.hub button{padding:14px 6px}
+.sw{width:34px;height:34px;border-radius:50%;border:2px solid #0b1e3a;padding:0}
+.sw.on{outline:3px solid #fbbf24}
+.pos{width:38px}
+.face{display:flex;justify-content:space-around;align-items:flex-end;background:#0b1e3a;border-radius:12px;padding:8px}.bub{border-radius:12px;padding:8px 10px;font-size:13px;margin:6px 0;max-width:88%;line-height:1.35}.bub.a{background:#7c2d12;margin-right:auto}.bub.m{background:#166534;margin-left:auto}.bub.bad{background:#7f1d1d}.sess{border:1px solid #2b4c80;border-radius:10px;padding:8px;margin:8px 0}input[type=range]{width:100%}#gear{padding:6px 10px}
+html{background:#050b1f}
+body{background:transparent!important}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(rgba(5,11,31,.45),rgba(5,11,31,.78)),url(stadium.jpg) center/cover no-repeat,url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 800%22 preserveAspectRatio=%22xMidYMid slice%22%3E%3Cdefs%3E%3ClinearGradient id=%22s%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23050b1f%22/%3E%3Cstop offset=%221%22 stop-color=%22%231b2f66%22/%3E%3C/linearGradient%3E%3CradialGradient id=%22g%22%3E%3Cstop offset=%220%22 stop-color=%22%23fff7c2%22 stop-opacity=%22.95%22/%3E%3Cstop offset=%221%22 stop-color=%22%23fff7c2%22 stop-opacity=%220%22/%3E%3C/radialGradient%3E%3ClinearGradient id=%22p%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%231f8a3b%22/%3E%3Cstop offset=%221%22 stop-color=%22%230f5a24%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22400%22 height=%22800%22 fill=%22url%28%23s%29%22/%3E%3Ccircle cx=%2260%22 cy=%22330%22 r=%2260%22 fill=%22url%28%23g%29%22/%3E%3Ccircle cx=%22340%22 cy=%22330%22 r=%2260%22 fill=%22url%28%23g%29%22/%3E%3Ccircle cx=%22200%22 cy=%22300%22 r=%2270%22 fill=%22url%28%23g%29%22 opacity=%22.5%22/%3E%3Crect x=%220%22 y=%22380%22 width=%22400%22 height=%22260%22 fill=%22%23142856%22/%3E%3Cpath d=%22M0 420Q200 360 400 420V640H0Z%22 fill=%22%231c3a78%22/%3E%3Cpath d=%22M0 600Q200 560 400 600V800H0Z%22 fill=%22url%28%23p%29%22/%3E%3Cg stroke=%22%23fff%22 stroke-width=%222%22 fill=%22none%22 opacity=%22.55%22%3E%3Cpath d=%22M40 690Q200 640 360 690%22/%3E%3Cellipse cx=%22200%22 cy=%22730%22 rx=%2260%22 ry=%2214%22/%3E%3C/g%3E%3Cg fill=%22%2394a3b8%22%3E%3Crect x=%2256%22 y=%22330%22 width=%228%22 height=%22110%22/%3E%3Crect x=%22336%22 y=%22330%22 width=%228%22 height=%22110%22/%3E%3C/g%3E%3Cg fill=%22%23fffbe0%22%3E%3Crect x=%2240%22 y=%22316%22 width=%2240%22 height=%2222%22/%3E%3Crect x=%22320%22 y=%22316%22 width=%2240%22 height=%2222%22/%3E%3C/g%3E%3C/svg%3E") center/cover no-repeat;background-color:#050b1f}
+.card{background:rgba(20,51,95,.9)!important;backdrop-filter:blur(2px)}
+.gb b{white-space:nowrap;font-size:14px}.week{display:flex;gap:4px}.dchip{flex:1;padding:6px 0!important;font-size:13px!important;background:#2b4c80;color:#fff;border-radius:8px!important;line-height:1.2}.dchip small{font-size:10px;text-transform:uppercase;opacity:.85}.dchip.cur{outline:2px solid #fbbf24}.dchip.past{opacity:.45}.dchip.md{background:#16a34a}
+footer{text-align:center;font-size:11px;color:#64748b;padding:14px}
+footer a{color:#94a3b8}
+</style>
+</head>
+<body>
+<header><h1>⚽ Club Manager FC</h1><select id="lang"></select><button id="gear" class="sec sm" onclick="openSet()" title="Settings">⚙️</button><div id="gbars" class="gbars"></div></header>
+<main id="app"></main>
+<div id="nav"></div>
+<footer><span data-i18n="footNote"></span> <a href="guide.html" data-i18n="guideLink"></a> · <a href="privacy.html" data-i18n="privacyLink"></a> · <a href="about.html" id="aboutLink">À propos</a></footer>
+
+<script src="lang.js"></script>
+<script src="lang2.js"></script>
+<script src="lang3.js"></script>
+<script src="lang4.js"></script>
+<script src="lang5.js"></script>
+<script>
+/* =================== Données =================== */
+const R=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+const pick=a=>a[R(0,a.length-1)];
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=R(0,i);[a[i],a[j]]=[a[j],a[i]]}return a};
+const $=id=>document.getElementById(id);
+const r1=x=>Math.round(x*10)/10;
+const clean=s=>String(s||"").replace(/[<>&"'`]/g,"").slice(0,20);
+const FN=["Karim","Luca","Yanis","Theo","Samuel","Idris","Marco","Diego","Elias","Noah","Malik","Axel","Jonas","Rafa","Omar","Felix","Bastien","Kofi","Ivan","Santi","Leo","Nils","Tidjane","Mateo","Amadou","Hugo","Enzo","Ruben"];
+const LN=["Duval","Okoro","Barrett","Moreau","Silva","Kane","Ndiaye","Rossi","Haddad","Berg","Costa","Mbala","Petrov","Lemaire","Ortega","Fofana","Novak","Diallo","Weber","Tanaka","Vidal","Mensah","Dupuis","Alves","Eto","Bianchi","Keller","Moyo"];
+const COUNTRIES=[
+ {id:"FR",off:2,after:false,divs:["Ligue 1","Ligue 2","National","National 2"],cup:"Coupe de France",types:["FC","AS","Olympique","Racing"],pre:["Val","Mont","Beau","Clair","Pont","Haut","Roc","Rive"],suf:["mont","ville","croix","val","bourg","lac","fort","belle"]},
+ {id:"EN",off:3,after:true,divs:["Premier League","Championship","League One","League Two"],cup:"FA Cup",types:["United","City","Athletic","Rovers"],pre:["Ash","Brook","Ox","Wood","Stone","River","Kings","Red"],suf:["ford","ton","field","bury","wick","ham","mouth","cliff"]},
+ {id:"ES",off:3,after:false,divs:["LaLiga","LaLiga 2","Primera Federación","Segunda Federación"],cup:"Copa del Rey",types:["CF","Real","Atlético","Deportivo"],pre:["San","Villa","Monte","Puerto","Costa","Sierra","Valle","Rio"],suf:["real","nova","alta","mar","verde","blanca","vega","roja"]},
+ {id:"IT",off:2,after:false,divs:["Serie A","Serie B","Serie C","Serie D"],cup:"Coppa Italia",types:["AC","Calcio","Virtus","Unione"],pre:["Monte","Porto","Castel","Villa","Bella","Torre","Ponte","Santa"],suf:["leone","nuovo","verde","alto","mare","rosso","forte","bianca"]},
+ {id:"DE",off:3,after:false,divs:["Bundesliga","2. Bundesliga","3. Liga","Regionalliga"],cup:"DFB-Pokal",types:["SV","TSV","VfL","FSV"],pre:["Berg","Wald","Stein","Nord","Bad","Rhein","Alt","Hohen"],suf:["burg","dorf","stadt","heim","feld","bach","furt","tal"]},
+ {id:"CM",off:-4,after:false,divs:["Elite One","Elite Two","Régionale 1","Régionale 2"],cup:"Coupe du Cameroun",types:["Lions","Aigles","Panthères","Étoile"],pre:["Mbo","Nko","Ebo","Bafo","Yao","Kri","Mvo","Dja"],suf:["ssa","ndé","bi","ra","mbé","ngo","kor","lé"]}
+];
+const dn=(c,l)=>COUNTRIES[c].divs[l];
+const LEVELS=4,NT=18,DAYS=2*(NT-1);
+const LVBASE=[76,66,57,48];
+const LF=[1,.6,.35,.2];
+const F=[16,6,2.4,1];
+const BUD=[9000,3200,1300,700];
+const SPB=[4160,1560,624,260];
+const TVP=[1600,600,240,100];
+const GATE=[256,96,38,16];
+const WG=[4000,1600,640,300];
+const MS=[24,10,4,1.6];                       /* salaire hebdo de base du manager */
+const CAP=[40000,18000,8000,3000];
+const WTV=Array.from({length:NT},(_,i)=>1.6-0.9*i/(NT-1)),WSUM=WTV.reduce((a,b)=>a+b,0);
+const tvOf=(l,i)=>Math.round(TVP[l]*WTV[Math.min(NT-1,Math.max(0,i))]*NT/WSUM);
+const SHARE={shirt:.4,stadium:.25,kit:.15,boards:.12,screen:.08};
+const SLOTS=["shirt","stadium","kit","boards","screen"];
+const STAFF=["coach","fit","doc","scout","youth","cagent"];
+const BRANDS=["Nova Telecom","AquaPure","Titan Motors","Sahel Bank","Orion Energy","Kivu Foods","Aero Jet","Lumo Mobile","Vita Drinks","Zenith Assur","Baobab Ciment","Delta Games","Mondial Tours","Pixel Pay","Savane Oil"];
+const KITS=["Forza","Kicko","Stride","Nexa","Apex Sport","Veloce"];
+const PAL=["#ef4444","#3b82f6","#22c55e","#eab308","#a855f7","#f97316","#14b8a6","#ec4899","#e5e7eb","#64748b","#84cc16","#0ea5e9"];
+/* Postes réels */
+const LINE={GK:"GK",DC:"DEF",AG:"DEF",AD:"DEF",MDC:"MID",MC:"MID",MOC:"MID",MG:"MID",MD:"MID",LW:"ATT",RW:"ATT",BU:"ATT"};
+const line=pos=>LINE[pos];
+const ALLPOS=Object.keys(LINE);
+const LAT={AG:0,MG:0,LW:0,GK:1,DC:1,MDC:1,MC:1,MOC:1,BU:1,AD:2,MD:2,RW:2};
+const WPOS=["GK","GK","DC","DC","DC","AG","AD","MDC","MDC","MC","MC","MOC","MG","MD","LW","RW","BU","BU"];
+const NUMS={GK:[1,12,13,25],DEF:[2,3,4,5,15,16,22,23],MID:[6,8,10,14,17,18,20],ATT:[7,9,11,19,21,24,27]};
+const FORM={
+"4-4-2":{s:["GK","AG","DC","DC","AD","MG","MC","MC","MD","BU","BU"],a:1,m:1,d:1},
+"4-3-3":{s:["GK","AG","DC","DC","AD","MC","MDC","MC","LW","BU","RW"],a:1.03,m:.98,d:1},
+"3-5-2":{s:["GK","DC","DC","DC","MG","MC","MDC","MC","MD","BU","BU"],a:1,m:1.04,d:.97},
+"4-2-3-1":{s:["GK","AG","DC","DC","AD","MDC","MDC","MOC","LW","BU","RW"],a:1.01,m:1.02,d:1.01},
+"4-1-4-1":{s:["GK","AG","DC","DC","AD","MDC","MG","MC","MC","MD","BU"],a:.98,m:1.03,d:1.02},
+"3-4-3":{s:["GK","DC","DC","DC","MG","MC","MC","MD","LW","BU","RW"],a:1.05,m:.99,d:.95},
+"5-3-2":{s:["GK","AG","DC","DC","DC","AD","MC","MDC","MC","BU","BU"],a:.96,m:1,d:1.06},
+"4-5-1":{s:["GK","AG","DC","DC","AD","MG","MC","MDC","MC","MD","BU"],a:.97,m:1.05,d:1.01}};
+const MEN=[{a:.92,d:1.08},{a:1,d:1},{a:1.08,d:.92}];
+const POS=["GK","DEF","MID","ATT"];
+const ATTR=["pac","sho","pas","dri","def","phy"];
+const WTS={GK:{def:.6,phy:.2,pas:.2},DEF:{def:.4,phy:.25,pac:.15,pas:.1,dri:.05,sho:.05},MID:{pas:.3,dri:.2,def:.15,phy:.1,pac:.1,sho:.15},ATT:{sho:.35,pac:.2,dri:.2,pas:.1,phy:.1,def:.05}};
+const LB={GK:{def:6,phy:0,pas:-3,sho:-18,dri:-15,pac:-10},DEF:{def:6,phy:4,pac:-1,pas:-3,dri:-6,sho:-10},MID:{pas:5,dri:2,def:-2,sho:-3,pac:-1,phy:-1},ATT:{sho:6,pac:3,dri:4,pas:-2,phy:-1,def:-14}};
+const PB={LW:{pac:4,dri:3},RW:{pac:4,dri:3},BU:{sho:3,phy:2},MDC:{def:4,phy:2},MOC:{pas:3,dri:2,sho:2},AG:{pac:3},AD:{pac:3},MG:{pac:2,dri:2},MD:{pac:2,dri:2},DC:{phy:2,def:2}};
+const SKIN=["#f1c27d","#e0ac69","#c68642","#8d5524","#5c3a21"];
+const HAIR=["#111","#3b2314","#a16207","#6b7280","#7c2d12","#e5c76b"];
+const BOOT=["#111","#f97316","#22c55e","#e5e7eb","#3b82f6"];
+const SPECS=["tact","youth","fin","motiv"];
+let pid=0,G=null,W=null,pc=0,tab="match",sub=null,PF=null,lastMatch=null,M=null,timer=null,selId=null,vc=null,vl=null,ST="mgr";
+let MF={kind:"ALL",pos:"ALL",age:"ALL",sort:"r",n:25};
+let CP=null,CPT="info",SETV=false,NEG=null;
+let SET={music:true,sound:true,vib:true,cur:"eur"};try{Object.assign(SET,JSON.parse(localStorage.getItem("cmfc_set")||"{}"))}catch(e){}
+let MG={name:"",skin:1,hs:0,hair:0,bd:0,tt:0,spec:"tact"};
+let SPEED=600;try{SPEED=+localStorage.getItem("cmfc_speed")||600}catch(e){}
+
+/* =================== Aides =================== */
+const en=p=>p.en===undefined?100:p.en;
+const pp=p=>p.rp||p.pos;
+const sn=p=>p.name.split(" ")[1];
+const nm=p=>p.n+" "+sn(p);
+const avail=p=>!(p.susp>0||p.inj>0||p.loanOut);
+const slotsFor=f=>FORM[f].s;
+const sLvl=r=>G&&G.staff&&G.staff[r]?G.staff[r].lvl:0;
+const aLvl=()=>G&&G.agent?G.agent.lvl:0;
+const mgrSpec=s=>G&&G.mgr&&G.mgr.spec===s;
+const mgrMul=()=>(mgrSpec("fin")?1.08:1)*(G&&G.phil==="money"?1.05:1)*(G?[1.12,1,.9][G.diff===undefined?1:G.diff]:1);
+function calcR(p){const w=WTS[line(p.pos)];let s=0;for(const k in w)s+=p.at[k]*w[k];return Math.round(clamp(s,30,99))}
+function genAttrs(p){
+  const lb=LB[line(p.pos)],pb=PB[p.pos]||{};p.at={};
+  ATTR.forEach(k=>{p.at[k]=clamp(Math.round(p.r+(lb[k]||0)+(pb[k]||0)+R(-5,5)),15,99)});
+  const d=p.r-calcR(p);ATTR.forEach(k=>{p.at[k]=clamp(p.at[k]+d,15,99)});p.r=clamp(calcR(p),40,99);
+}
+function shiftAttrs(p,d){ATTR.forEach(k=>{p.at[k]=clamp(p.at[k]+d,15,99)});p.r=clamp(calcR(p),40,99)}
+function wageOf(p,l){return Math.max(.3,r1(WG[l]/DAYS/18*Math.pow(p.r/LVBASE[l],3)))}
+function pv(p){const b=Math.round(Math.pow(Math.max(0,p.r-35),2.25)*0.33+30);return p.age<23?Math.round(b*(1+Math.max(0,p.pot-p.r)/40)):b}
+const attrCost=p=>Math.max(8,Math.round((20+(p.r-50)*4)*(1-0.05*sLvl("coach"))));
+function pickAge(){const x=R(0,9);return x<2?R(17,21):x<8?R(22,30):R(31,35)}
+function mkPlayer(pos,base,age){
+  age=age||pickAge();
+  const r=clamp(Math.round(base+R(-8,8)-(age<23?R(0,4):0)),40,99);
+  const p={id:++pid,name:pick(FN)+" "+pick(LN),pos,age,r,pot:age<23?Math.min(99,r+R(3,16)):r,yc:0,susp:0,inj:0,goals:0,en:100,c:R(1,4),w:0,ap:0,mins:0,yt:0,rt:0,gt:0,listed:null,loanOut:false,loanIn:false};
+  genAttrs(p);return p;
+}
+function assignNums(squad){
+  const used=new Set(squad.map(p=>p.n).filter(Boolean));
+  squad.forEach(p=>{if(p.n)return;let n=NUMS[line(p.pos)].find(x=>!used.has(x));if(!n){n=30;while(used.has(n))n++}p.n=n;used.add(n)});
+}
+const STAR=(l,i)=>([5,9,14,16].includes(i)&&Math.random()<[.8,.45,.2,.08][l])?R(5,[17,12,8,5][l]):0;
+function mkSquad(base,l){
+  const s=WPOS.slice(0,0).concat(["GK","GK","DC","DC","DC","AG","AD","MDC","MDC","MC","MC","MOC","MG","MD","LW","RW","BU","BU"]).map((pos,ii)=>{const p=mkPlayer(pos,base+STAR(l,ii));p.w=wageOf(p,l);return p});
+  assignNums(s);return s;
+}
+function ensureSquad(t){if(!t.squad)t.squad=mkSquad(t.str,t.l)}
+function schedule(n){
+  const t=[...Array(n).keys()],rounds=[];
+  for(let r=0;r<n-1;r++){const m=[];for(let i=0;i<n/2;i++){const a=t[i],b=t[n-1-i];m.push(r%2?[b,a]:[a,b])}rounds.push(m);t.splice(1,0,t.pop())}
+  return rounds.concat(rounds.map(r=>r.map(([a,b
+</script>
+</body>
+</html>
